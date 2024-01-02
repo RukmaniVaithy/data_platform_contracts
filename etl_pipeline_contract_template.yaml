@@ -1,0 +1,24 @@
+# Example ETL pipeline contract to be on-boarded to Data Platform
+
+# etl_pipeline_contract
+owner: 
+description: 
+schedule_interval: 
+
+# Data Details
+data_details:
+  tables:
+    - table_name: 
+      schema: 
+      format: 
+      description: 
+      owner: 
+      upstream_applications: []
+      downstream_applications: []
+
+# Connections
+connections:
+  - connection_name: 
+    connection_type: 
+    description: 
+    owner: 

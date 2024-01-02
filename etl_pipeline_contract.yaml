@@ -1,0 +1,52 @@
+# Example ETL pipeline contract to be on-boarded to Data Platform
+
+# etl_pipeline_contract
+owner: big_data_team
+description: >
+  ETL pipeline for processing and transferring example data across the platform.
+schedule_interval: "@daily"
+
+# Data Details
+data_details:
+  tables:
+    - table_name: raw_big_data
+      schema: 
+        type: struct
+        fields:
+          - name: user_id
+            type: integer
+          - name: username
+            type: string
+          - name: event_type
+            type: string
+          - name: event_timestamp
+            type: timestamp
+      format: parquet
+      description: Raw big data extracted from the source.
+      owner: source_system_team
+      upstream_applications:
+        - source_system_app
+      downstream_applications:
+        - big_data_application
+
+    - table_name: transformed_big_data
+      schema: destination_system
+      format: avro
+      description: Transformed big data ready for loading.
+      owner: big_data_team
+      upstream_applications:
+        - big_data_application
+      downstream_applications:
+        - destination_system_app
+
+# Connections
+connections:
+  - connection_name: source_big_data_connection
+    connection_type: jdbc
+    description: Connection to the source big data store.
+    owner: source_system_team
+
+  - connection_name: destination_big_data_connection
+    connection_type: jdbc
+    description: Connection to the destination big data store.
+    owner: destination_system_team
